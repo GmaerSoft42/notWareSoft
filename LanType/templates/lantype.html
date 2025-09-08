@@ -12,7 +12,7 @@
     <div class="inputfield">Type words: <input placeholder="", id="words"> <br></div>
     <div class="button"><button onclick="getwords()"> Get Words </button> <br> </div>
     <script>
-        setTimeout(() => { window.location.href = "/results"; }, 60000);
+        setTimeout(() => { window.location.href = "/results.html"; }, 60000);
         function getwords(){
                         console.log("Function has run!")
                         fetch('/get-words')

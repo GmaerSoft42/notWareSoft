@@ -51,6 +51,13 @@ def characters():
             typed.append( word)   
     threading.Thread(target=game).start()
     return jsonify(message=" ".join(typed))  
+@app.route("/results")
+def display_endpage():
+    global ended
+    global correct_words
+    global nextword
+    global incorrect
+    return render_template('results.html', score=correct_words, incorrect_words = incorrect, words=typed)
 def game():
     global ended
     global correct_words
