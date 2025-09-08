@@ -53,10 +53,12 @@ def characters():
     return jsonify(message=" ".join(typed))  
 @app.route("/results")
 def display_endpage():
-    global ended
     global correct_words
-    global nextword
+    global typed
     global incorrect
+    print(f"DEBUG: Value of NEXTWORD is {nextword}")
+    print(f"DEBUG: Value of wordstr is {incorrect}")
+    print(f"DEBUG: value of typed is {typed}")
     return render_template('results.html', score=correct_words, incorrect_words = incorrect, words=typed)
 def game():
     global ended
