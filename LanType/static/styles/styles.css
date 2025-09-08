@@ -1,0 +1,24 @@
+p {
+    text-align: center;
+    color:rgb(0, 0, 0);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+h1 {
+    text-align: center;
+    color: rgb(45, 182, 216);
+    font-family: 'Courier New', Courier, monospace;
+
+}
+.button{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+}
+.inputfield{
+    text-align: center;
+    color:rgb(17, 223, 205);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
+
+
+}
