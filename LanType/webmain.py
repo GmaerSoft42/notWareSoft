@@ -27,7 +27,7 @@ def timer():
         time.sleep(60)
         print("Time's Up!")
         ended = True
-        return render_template('results.html', score=correct_words, incorrect_words = incorrect, words=typed)
+        #return render_template('results.html', score=correct_words, incorrect_words = incorrect, words=typed)
     
 @app.route("/")
 def mainpage():
