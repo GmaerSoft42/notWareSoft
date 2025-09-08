@@ -75,13 +75,7 @@ def game():
     threading.Thread(target=timer).start()
     while not ended:
             wordstr = ""
-            print(f"DEBUG: Value of NEXTWORD is {nextword}")
-            print(f"DEBUG: Value of wordstr is {wordstr}")
-            print(f"DEBUG: value of typed is {typed}")
             while wordstr != typed[nextword]:
-                print(f"DEBUG: Value of NEXTWORD is {nextword}")
-                print(f"DEBUG: Value of wordstr is {wordstr}")
-                print(f"DEBUG: value of typed is {typed}")
                 if flag == True:
                     character = key_stroke
                     print("Round of a loop!")
