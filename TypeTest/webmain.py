@@ -3,7 +3,7 @@ from flask import render_template
 import threading
 import time
 import random
-print("Gmaer Typing Website: © Okmeque1 Software")
+print("TypeTest Typing Website: © Okmeque1 Software")
 global ended
 ended = False
 
@@ -31,7 +31,7 @@ def timer():
     
 @app.route("/")
 def mainpage():
-    return render_template('Gmaer.html')
+    return render_template('TypeTest.html')
 @app.route("/keystroke", methods=["POST"])
 def get_character():
     global key_stroke
