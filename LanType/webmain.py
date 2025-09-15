@@ -3,7 +3,7 @@ from flask import render_template
 import threading
 import time
 import random
-print("LanType Typing Website: © Lan Internet Software")
+print("Gmaer Typing Website: © Okmeque1 Software")
 global ended
 ended = False
 
@@ -17,7 +17,7 @@ def get_word(amount=1000):
             final.append(random.choice(words))
         return final
 def timer():
-    
+    return
     with app.app_context():
         global ended
         global correct_words
@@ -31,7 +31,7 @@ def timer():
     
 @app.route("/")
 def mainpage():
-    return render_template('lantype.html')
+    return render_template('Gmaer.html')
 @app.route("/keystroke", methods=["POST"])
 def get_character():
     global key_stroke
@@ -39,7 +39,7 @@ def get_character():
     if request.get_json("words")["key"] != "":
         flag = True
         key_stroke = request.get_json("words")["key"][-1]
-        flag = False
+        #flag = False
         return request.get_json("words")["key"][-1]
     return ""
 @app.route("/get-words")
@@ -55,11 +55,11 @@ def characters():
 def display_endpage():
     global correct_words
     global typed
+    global actually_correct_words
     global incorrect
-    print(f"DEBUG: Value of NEXTWORD is {nextword}")
     print(f"DEBUG: Value of wordstr is {incorrect}")
     print(f"DEBUG: value of typed is {typed}")
-    return render_template('results.html', score=correct_words, incorrect_words = incorrect, words=typed)
+    return render_template('results.html', score=correct_words, incorrect_words = incorrect, correct=actually_correct_words)
 def game():
     global ended
     global correct_words
@@ -68,30 +68,39 @@ def game():
     global incorrect
     global key_stroke
     global flag
+    global actually_correct_words
     key_stroke = ""
     flag = False
     correct_words = 0
     nextword = 0
     character = ""
     incorrect = {}
-    threading.Thread(target=timer).start()
+    actually_correct_words = {}
+    #threading.Thread(target=timer).start()
     while not ended:
             wordstr = ""
-            while wordstr != typed[nextword]:
+            print(f"DEBUG: Value of nextword is {nextword}")
+            print(f"DEBUG: value of typed is {typed}")
+            print(f"DEBUG: value of Wordstr is {wordstr}")
+            while wordstr != typed[nextword-1]:
+
                 if flag == True:
                     character = key_stroke
                     print("Round of a loop!")
-                if character in (" "):
-                    if wordstr != typed[nextword-1] and wordstr != "":
-                        incorrect[typed[nextword-1]] = wordstr
-                    elif wordstr != "":
-                        correct_words += 1                     
-                    break
-                else:
-                    print(character, end='', flush=True)
-                    wordstr += character
-                    if wordstr == typed[nextword]:
-                        correct_words += 1      
+                    flag = False
+                    if character in (" "):
+                        if wordstr != typed[nextword] and wordstr != "":
+                            incorrect[typed[nextword]] = wordstr
+                        elif wordstr != "":
+                            actually_correct_words[typed[nextword]] = wordstr
+                            correct_words += 1                     
+                        break
+                    else:
+                        print(character, end='', flush=True)
+                        wordstr += character
+                        if wordstr == typed[nextword]:
+                            correct_words += 1  
+            print("DEBUG: This is the infinite loop that causes the entire program to crash")    
             nextword += 1              
     
                       
