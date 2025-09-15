@@ -7,6 +7,7 @@ I know the words.json file is a terrible selection, currently trying to find a b
 ## MODULES REQUIRED:
 
 1/ `flask`
+
 2/ For MAIN.PY (command line version), `msvcrt`
 
 ## How to INSTALL and RUN
