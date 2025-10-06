@@ -1,5 +1,11 @@
 - BOOK STORE:
 
 
-TITLE ISBN BORROWED
+TITLE ISBN BORROWED very good
 LES MISERABLES 9782211238465 TRUE
+
+
+When you update a member to get a borrowed book, you will also update the other table (borrowed books) and this record is permanent: it will never shrink in size. It will only ever grow or go back to 0
+
+
+

@@ -32,12 +32,12 @@ class DataBase():
             id integer primary key autoincrement,
             member_id integer,
             book_id integer,
-            BORROWED text,
+            BORROWED_DATE text, 
             RETURNDATE text,
-            RETURNED int,
+            RETURN_STATUS int,
             FOREIGN KEY(member_id) REFERENCES members(member_id),
             FOREIGN KEY(book_id) REFERENCES books(book_id)
-        );""")  # RETURNED = if book has been returned
+        );""")  # BORROWED = date when it was borrowed
     def create_table_books(self):
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS books (
             book_id integer primary key autoincrement,
