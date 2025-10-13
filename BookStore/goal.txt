@@ -14,6 +14,8 @@ BORROW BOOK -> check in borrowed (table) to see if book is already taken
 		|-> If no, set the book status to 1 and add an entry in BORROWED_BOOKS table
 
 Members update based on the borrowed_books table
+
+BOOK IS AVAILABLE IF RETURN_STATUS IS 1
 												
 
 a1 is a mess-up as it does not comply with the beethoven sonata in Bb minor and Ab major complying with Chopin's new Valse op.64 nr.2
