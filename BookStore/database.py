@@ -27,6 +27,12 @@ class DataBase():
             SET BORROWED = ?
         WHERE NAME LIKE ?;""", (borrowed, name))
         self.connection.commit()
+    def fetch_member(self, name):
+        self.cursor.execute(f"""SELECT ID FROM books
+                            WHERE NAME LIKE ?;
+        """, (name,))
+        rows = self.cursor.fetchall()
+        return rows
     def create_table_borrowed_books(self):
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS borrowed (
             id integer primary key autoincrement,
@@ -44,22 +50,36 @@ class DataBase():
             NAME text,
             AUTHOR text,
             ISBN text,
-            EDITION text
+            EDITION text,
+            IS_BORROWED integer default 0
         );""")      
     def add_books(self, name, author, isbn, edition):
         self.cursor.execute("""INSERT INTO books
-                            (NAME, AUTHOR, ISBN, EDITION)
-                            values (?, ?, ?, ?)     
+                            (NAME, AUTHOR, ISBN, EDITION, IS_BORROWED)
+                            values (?, ?, ?, ?, 0)     
                             """, (name, author, isbn, edition))
         self.connection.commit() # Will have to change to make it the correct values
-    def update_books(self, name, author, isbn, edition):
+    def update_books(self, name, author, isbn, edition, status):
         self.cursor.execute("""UPDATE books 
             SET NAME = ?,
                 AUTHOR = ?,
                 ISBN = ?,
-                EDITION = ?
-        WHERE NAME LIKE ?;""", (name, author, isbn, edition, name))
+                EDITION = ?,
+                IS_BORROWED = ?
+        WHERE NAME LIKE ?;""", (name, author, isbn, edition, status, name))
         self.connection.commit()
+    def fetch_book_id(self, name):
+        self.cursor.execute(f"""SELECT ID FROM books
+                            WHERE NAME LIKE ?;
+        """, (name,))
+        rows = self.cursor.fetchall()
+        return rows        
+    def fetch_status(self, name):
+        self.cursor.execute(f"""SELECT IS_BORROWED FROM books
+                            WHERE NAME LIKE ?;
+        """, (name,))
+        rows = self.cursor.fetchall()
+        return rows
     def fetch(self, tablename):
         self.cursor.execute(f"""SELECT * FROM {tablename}
         """)
