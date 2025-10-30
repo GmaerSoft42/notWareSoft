@@ -15,7 +15,7 @@ You **must** leave this repository if you do not agree with the statements ***an
 ### Disclaimer pulled from `T1taniumF0rge-Industries-Inc/Software` - © T1taniumF0rge Industries Inc.: [`/T1taniumF0rge-Industries-Inc`](https://github.com/T1taniumF0rge-Industries-Inc) - All Rights Reserved. Their main repository is [here](https://github.com/T1taniumF0rge-Industries-Inc/Software). 
 
 > [!NOTE]
-> In any situation where a warranty or liability disclaimer is present in the `Software` repository, "we", "The Software Team", "The Devs", "The Developers" all refer to the Owner, the main developers and main maintainers, and the developers and maintainers of this repository. A warranty or liability disclaimer is a paragraph that includes "We will ***not*** be liable for **any damages caused by**", etc... and explains that we aren't liable for any damages no matter what. 
+> In any situation where a warranty or liability disclaimer is present in the `notWareSoft` repository, "we", "The Software Team", "The Devs", "The Developers" all refer to the Owner, the main developers and main maintainers, and the developers and maintainers of this repository. A warranty or liability disclaimer is a paragraph that includes "We will ***not*** be liable for **any damages caused by**", etc... and explains that we aren't liable for any damages no matter what. 
 
 > [!TIP]
 >
