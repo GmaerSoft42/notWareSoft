@@ -1,7 +1,7 @@
 # notWareSoft
 because I hate git so this will allow me to have a proper git
 
-to be more serious, the Software repository is broken to hell honestly and even the WareSoft repo is broken because of LFS overbloat so I'll fix it eventually but this is a temporary repo so that I can clone things, etc
+to be more serious, the Software repository is broken to hell honestly and even the WareSoft repo is broken because of LFS overbloat so I'll fix it eventually but this is a temporary repo so that I can clone things, etc. Also where some projects may live
 
 
 ## Warranty and Liability Agreement:
@@ -20,3 +20,13 @@ You **must** leave this repository if you do not agree with the statements ***an
 > [!TIP]
 >
 > GmaerSoft42 is a active contributor of the Software repository, so he can use a lot of the material there freely :)
+
+## Projects:
+
+1 -> Typing Website: pretty self-explanatory but don't expect to be as good as MonkeyType or whatever
+
+2 -> BookStore: a pretty cool front interface for managing books in a library.
+
+## Troubleshooting
+
+Programms will always come with error messages. Guidance on errors as well as error codes use the `T1taniumF0rge Industries Inc` standard [error chart](https://github.com/T1taniumF0rge-Industries-Inc/Software/blob/main/PySoft/Errors%20chart.md)
