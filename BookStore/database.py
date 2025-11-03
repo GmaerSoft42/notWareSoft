@@ -26,12 +26,15 @@ class DataBase():
     #        SET BORROWED = ?
     #    WHERE NAME LIKE ?;""", (borrowed, name))
     #    self.connection.commit()
-    def fetch_member(self, name):
+    def fetch_member(self, surname):
         self.cursor.execute(f"""SELECT member_id FROM members
-                            WHERE NAME LIKE ?;
-        """, (name,))
+                            WHERE SURNAME LIKE ?;
+        """, (surname,))
         rows = self.cursor.fetchall()
-        return rows
+        if rows:
+            return rows
+        else:
+            return 1
     def create_table_borrowed_books(self):
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS borrowed (
             id integer primary key autoincrement,
@@ -53,31 +56,48 @@ class DataBase():
         print(rows)
         if (0,) in rows:
             print("You ain't supposed to borrow that kid!")
-            return "You ain't supposed to borrow that kid!"
-        self.cursor.execute("""INSERT INTO borrowed
-                            (member_id, book_id, BORROWED_DATE, RETURNDATE, RETURN_STATUS)
-                            values (?, ?, ?, ?, 0)     
-                            """, (member_id, book_id, borrowed_date, returndate, ))
-        self.connection.commit() # Will have to change to make it the correct values
+            return 1
+        else:
+            self.cursor.execute("""INSERT INTO borrowed
+                                (member_id, book_id, BORROWED_DATE, RETURNDATE, RETURN_STATUS)
+                                values (?, ?, ?, ?, 0)     
+                                """, (member_id, book_id, borrowed_date, returndate, ))
+            self.connection.commit() # Will have to change to make it the correct values
+    def return_borrow_list(self, book_id):
+        self.cursor.execute("""SELECT RETURN_STATUS FROM borrowed
+                            WHERE book_id like ?
+                            """, (book_id,))
+        rows = self.cursor.fetchall()
+        print("DEBUG: VARIABLES IN DATABASE.PY ADD BORROW LIST FUNC TION")
+        print(book_id)
+        print(rows)
+        if (1,) in rows:
+            print("This book ain't even borrowed, donate instead of trying to pass it off as real")
+            return 1  
+        else:
+            self.cursor.execute("""UPDATE borrowed
+                            SET RETURN_STATUS = 1    
+                                """)      
+            self.connection.commit()
     def create_table_books(self):
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS books (
             book_id integer primary key autoincrement,
             NAME text,
             AUTHOR text,
-            ISBN text,
+            OLID text,
             EDITION text,
             IS_BORROWED integer default 0
         );""")      
-    def add_books(self, name, author, isbn, edition):
+    def add_books(self, name, author, olid, edition):
         self.cursor.execute("""SELECT 1 FROM books
                     WHERE NAME = ?
                             """, (name,))
         rows = self.cursor.fetchall()
         if not rows:
             self.cursor.execute("""INSERT INTO books
-                                (NAME, AUTHOR, ISBN, EDITION, IS_BORROWED)
+                                (NAME, AUTHOR, OLID, EDITION, IS_BORROWED)
                                 values (?, ?, ?, ?, 0)     
-                                """, (name, author, isbn, edition))
+                                """, (name, author, olid, edition))
             self.connection.commit() # Will have to change to make it the correct values
     def member_borrowed_books(self, name):
 
@@ -94,22 +114,24 @@ class DataBase():
                             """, (member_id,))
         rows = self.cursor.fetchall()
         return rows
-
-    def update_books(self, name, author, isbn, edition, status):
+    def update_books(self, name, author, olid, edition, status):
         self.cursor.execute("""UPDATE books 
             SET NAME = ?,
                 AUTHOR = ?,
-                ISBN = ?,
+                OLID = ?,
                 EDITION = ?,
                 IS_BORROWED = ?
-        WHERE NAME LIKE ?;""", (name, author, isbn, edition, status, name))
+        WHERE NAME LIKE ?;""", (name, author, olid, edition, status, name))
         self.connection.commit()
     def fetch_book_id(self, name):
         self.cursor.execute(f"""SELECT book_id FROM books
                             WHERE NAME LIKE ?;
         """, (name,))
         rows = self.cursor.fetchall()
-        return rows        
+        if rows:
+            return rows
+        else:
+            return 1        
     def fetch_status(self, name):
         self.cursor.execute(f"""SELECT IS_BORROWED FROM books
                             WHERE NAME LIKE ?;
@@ -121,3 +143,6 @@ class DataBase():
         """)
         rows = self.cursor.fetchall()
         return rows
+    def clear_borrowed(self):
+        self.cursor.execute("""DROP TABLE borrowed""")
+        self.create_table_borrowed_books()
